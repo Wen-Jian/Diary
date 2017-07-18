@@ -8,14 +8,16 @@
 
 import UIKit
 private let reuseIdentifier = "Cell"
+
 class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICollectionViewDelegate, UIPickerViewDelegate,UIPickerViewDataSource {
 
     @IBOutlet weak var calendar: UICollectionView!
     let classfication = ["工作記事", "心情扎記"]
     var year = [String]()
     var month = [String]()
-    var yearused = 2016
-    var monthused = 7
+    var yearused = 2000
+    var monthused = 1
+    var classselected = 0
     var week = Int()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +51,18 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var numberofday = 0
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! dateCollectionViewCell
-        week = ((yearused%100) + (yearused%100/4) + (20/4) - 2 * 20 + (26*(monthused+1)/10)+1-1)%7
-        
+        switch monthused {
+        case 1:
+            monthused = 13
+            yearused -= 1
+        case 2:
+            monthused = 14
+            yearused -= 1
+        default:
+            print(monthused)
+        }
+        week = ((yearused%100) + ((yearused%100)/4) + (20/4) - 2 * 20 + (26*(monthused+1)/10)+1-1)%7
+        print(week)
         if indexPath.row < week {
             
             cell.title.text = ""
@@ -76,7 +88,7 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
                 numberofday = 30
                 
             }
-            print (numberofday)
+            
             if indexPath.row - week < numberofday {
                 cell.title.text = "\(indexPath.row + 1 - week)"
             }else {
@@ -116,6 +128,18 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         }
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch component {
+        case 0:
+            yearused = Int(year[row])!
+        case 1:
+            monthused = Int(month[row])!
+        default:
+            classselected = Int(classfication[row])!
+        }
+        
+        self.calendar.reloadData()
+    }
     
     
     
