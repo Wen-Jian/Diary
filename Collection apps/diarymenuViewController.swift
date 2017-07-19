@@ -59,7 +59,8 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
             monthused = 14
             yearused -= 1
         default:
-            print(monthused)
+            print(1)
+            //print(monthused)
         }
         week = ((yearused%100) + ((yearused%100)/4) + (20/4) - 2 * 20 + (26*(monthused+1)/10)+1-1)%7
         print(week)
@@ -70,9 +71,9 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
             
             switch monthused {
                 
-            case 1,3,5,7,8,10,12:
+            case 3,5,7,8,10,12,13:
                 numberofday = 31
-            case 2:
+            case 14:
                 if (yearused%4 == 0 && yearused%100 != 0) || yearused%400 == 0 {
                     
                     numberofday = 29
@@ -132,12 +133,19 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         switch component {
         case 0:
             yearused = Int(year[row])!
+            print(year[row])
         case 1:
+            if monthused == 13 || monthused == 14 {
+                yearused += 1
+            }
             monthused = Int(month[row])!
+            
         default:
             classselected = Int(classfication[row])!
         }
         
+        print(yearused)
+        print(monthused)
         self.calendar.reloadData()
     }
     
