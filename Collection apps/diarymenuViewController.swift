@@ -149,6 +149,26 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         self.calendar.reloadData()
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var monthref:Int
+        var yearref = Int()
+        var dateref = indexPath.row - week + 1
+        if monthused == 13 || monthused == 14{
+            yearref = yearused + 1
+            switch monthused {
+            case 13:
+                monthref = 1
+            default:
+                monthref = 2
+                
+            }
+        }else {
+            yearref = yearused
+            monthref = monthused
+        }
+        
+        self.performSegue(withIdentifier: "Diaryediting", sender: nil)
+    }
     
     
 
