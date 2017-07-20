@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var AccountLogin: UIButton!
     @IBOutlet weak var Account: UITextField!

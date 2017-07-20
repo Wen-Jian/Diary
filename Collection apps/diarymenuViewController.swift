@@ -19,6 +19,10 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
     var monthused = 1
     var classselected = 0
     var week = Int()
+    var monthref = Int()
+    var yearref = Int()
+    var dateref = Int()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         /*calendar.register(dateCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)*/
@@ -91,7 +95,7 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
             }
             
             if indexPath.row - week < numberofday {
-                cell.title.text = "\(indexPath.row + 1 - week)"
+                cell.title.text = "\(indexPath.row + 2 - week)"
             }else {
                 cell.title.text = ""
             }
@@ -144,15 +148,14 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
             classselected = Int(classfication[row])!
         }
         
-        print(yearused)
-        print(monthused)
+        //print(yearused)
+        //print(monthused)
         self.calendar.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var monthref:Int
-        var yearref = Int()
-        var dateref = indexPath.row - week + 1
+        
+        dateref = indexPath.row - week + 2
         if monthused == 13 || monthused == 14{
             yearref = yearused + 1
             switch monthused {
@@ -170,6 +173,17 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         self.performSegue(withIdentifier: "Diaryediting", sender: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Diaryediting"{
+            
+            
+            let NextVC = segue.destination as! submitnewdiaryViewController
+            NextVC.currentyear = yearref
+            NextVC.currentmonth = monthref
+            NextVC.currentdate = dateref
+            print(NextVC.currentyear)
+        }
+    }
     
 
     /*
