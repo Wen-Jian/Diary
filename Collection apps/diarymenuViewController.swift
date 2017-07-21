@@ -15,7 +15,7 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
     let classfication = ["工作記事", "心情扎記"]
     var year = [String]()
     var month = [String]()
-    var yearused = 2000
+    var yearused = 2002
     var monthused = 1
     var classselected = 0
     var week = Int()
@@ -27,7 +27,7 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         super.viewDidLoad()
         /*calendar.register(dateCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)*/
         
-        for i in 2000...2017 {
+        for i in 2002...2017 {
             
             year.append(String(i))
             
@@ -57,28 +57,42 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! dateCollectionViewCell
         switch monthused {
         case 1:
-            monthused = 13
-            yearused -= 1
+            monthref = 13
+            
         case 2:
-            monthused = 14
-            yearused -= 1
+            monthref = 14
+            
         default:
-            print(1)
-            //print(monthused)
+            monthref = monthused
         }
-        week = ((yearused%100) + ((yearused%100)/4) + (20/4) - 2 * 20 + (26*(monthused+1)/10)+1-1)%7
+        
+        
+        if monthref == 13 || monthref == 14 {
+            
+            yearref = yearused - 1
+            
+            
+        }else {
+            
+            yearref = yearused
+            
+            
+        }
+        
+        week = (yearref - 1 + (yearref-1)/4 - (yearref-1)/100 + (yearref-1)/400 + 13*(monthref+1)/5 + 1) % 7
         print(week)
+        
         if indexPath.row < week {
             
             cell.title.text = ""
         }else {
             
-            switch monthused {
+            switch monthref {
                 
             case 3,5,7,8,10,12,13:
                 numberofday = 31
             case 14:
-                if (yearused%4 == 0 && yearused%100 != 0) || yearused%400 == 0 {
+                if (yearused % 4 == 0 && yearused % 100 != 0) || yearused%400 == 0 {
                     
                     numberofday = 29
                     
@@ -95,7 +109,7 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
             }
             
             if indexPath.row - week < numberofday {
-                cell.title.text = "\(indexPath.row + 2 - week)"
+                cell.title.text = "\(indexPath.row + 1 - week)"
             }else {
                 cell.title.text = ""
             }
@@ -137,38 +151,26 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         switch component {
         case 0:
             yearused = Int(year[row])!
-            print(year[row])
         case 1:
-            if monthused == 13 || monthused == 14 {
-                yearused += 1
-            }
+            
             monthused = Int(month[row])!
             
         default:
             classselected = Int(classfication[row])!
         }
-        
-        //print(yearused)
-        //print(monthused)
+       
         self.calendar.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        dateref = indexPath.row - week + 2
-        if monthused == 13 || monthused == 14{
-            yearref = yearused + 1
-            switch monthused {
-            case 13:
-                monthref = 1
-            default:
-                monthref = 2
-                
-            }
-        }else {
-            yearref = yearused
-            monthref = monthused
+        if indexPath.row >= week {
+            
+            dateref = indexPath.row - week + 1
+            
         }
+        
+        
         
         self.performSegue(withIdentifier: "Diaryediting", sender: nil)
     }
@@ -178,10 +180,10 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
             
             
             let NextVC = segue.destination as! submitnewdiaryViewController
-            NextVC.currentyear = yearref
-            NextVC.currentmonth = monthref
+            NextVC.currentyear = yearused
+            NextVC.currentmonth = monthused
             NextVC.currentdate = dateref
-            print(NextVC.currentyear)
+            
         }
     }
     
