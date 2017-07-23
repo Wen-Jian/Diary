@@ -80,7 +80,6 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         }
         
         week = (yearref - 1 + (yearref-1)/4 - (yearref-1)/100 + (yearref-1)/400 + 13*(monthref+1)/5 + 1) % 7
-        print(week)
         
         if indexPath.row < week {
             
