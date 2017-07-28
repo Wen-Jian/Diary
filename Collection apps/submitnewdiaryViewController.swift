@@ -9,22 +9,23 @@
 import UIKit
 import CoreData
 
-class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
     var currentyear = Int()
     var currentmonth = Int()
     var currentdate = Int()
+    var time = Date()
     @IBOutlet weak var monthtextfield: UITextField!
     @IBOutlet weak var yeartextfield: UITextField!
     
     @IBOutlet weak var datetextfield: UITextField!
     
-    @IBOutlet weak var Content: UITextField!
     
     @IBOutlet weak var memeryImage: UIImageView!
     var datecomponent = NSDateComponents()
     var calendar = NSCalendar.current
     
+    @IBOutlet weak var Content: UITextView!
     
     
     override func viewDidLoad() {
@@ -32,13 +33,16 @@ class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITex
         yeartextfield.text = "\(currentyear)"
         monthtextfield.text = String(currentmonth)
         datetextfield.text = String(currentdate)
-        
-        
-        
-        
         datecomponent.day = Int(datetextfield.text!)!
         datecomponent.month = Int(monthtextfield.text!)!
         datecomponent.year = Int(yeartextfield.text!)!
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.contentfinishediting))
+        
+        tap.cancelsTouchesInView = false
+        
+        self.view.addGestureRecognizer(tap)
+        
         
         
 
@@ -56,9 +60,9 @@ class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITex
         let timestring = "\(datecomponent.day), \(datecomponent.month), \(datecomponent.year)"
         let formatter = DateFormatter()
         formatter.dateFormat = "dd, MM, yyyy"
-        var time = formatter.date(from: timestring)
+        time = formatter.date(from: timestring)!
         
-        return time!
+        return time
        
     }
     
@@ -72,9 +76,10 @@ class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITex
             
             
             newDiary.setValue(Content.text, forKey: "content")
-            let dateforrecord =
+            let dateforrecord = time
+            newDiary.setValue(dateforrecord, forKey: "date")
             newDiary.setValue(dateconvert(datecomponent: datecomponent), forKey: "date")
-            if let imagerecord = memeryImage.image {
+            if let imagerecord = UIImagePNGRepresentation(memeryImage.image!) as? NSData {
                 
                 newDiary.setValue(imagerecord, forKey: "image")
             }
@@ -82,7 +87,11 @@ class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITex
         }
         
         do {
+            
             try context.save()
+            print("成功提交")
+            self.performSegue(withIdentifier: "backtocalendar", sender: nil)
+            
         }catch{
             print("save failed")
         }
@@ -132,6 +141,38 @@ class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITex
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = ""
+    }
+    
+    func contentfinishediting(){
+        
+        if Content.text == "" && Content.text != "今天發生什麼事情？"{
+            
+            Content.text = "今天發生什麼事情？"
+        }
+        self.view.endEditing(true)
+        
+    }
+    
+    @IBAction func imagefromlibry(_ sender: UIButton) {
+        
+        let imagepicker = UIImagePickerController()
+        imagepicker.delegate = self
+        imagepicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        
+        self.present(imagepicker, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let image = info [UIImagePickerControllerOriginalImage] as? UIImage {
+            
+            memeryImage.image = image
+            
+            self.dismiss(animated: true, completion: nil)
+            
+        }
+        
     }
 
     /*
