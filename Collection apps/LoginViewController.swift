@@ -195,17 +195,11 @@ class LoginViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "Loginsuccess" {
+
             
-            let test = segue.destination as! UITabBarController
-            let nextVC = test.viewControllers![0] as! friendViewController
-            nextVC.currentUser = self.currentUser
-            
-        }
+    
         
-    }
+    
     //func fetchAccount (username:String)->(Bool, Array<Any>){
         
     //}

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 private let reuseIdentifier = "Cell"
 
 class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICollectionViewDelegate, UIPickerViewDelegate,UIPickerViewDataSource {
@@ -23,6 +24,7 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
     var yearref = Int()
     var dateref = Int()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         /*calendar.register(dateCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)*/
@@ -35,6 +37,8 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         for i in 1...12 {
             month.append(String(i))
         }
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -171,7 +175,7 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         
         
         
-        self.performSegue(withIdentifier: "Diaryediting", sender: nil)
+        self.performSegue(withIdentifier: "showList", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -185,7 +189,89 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
             
         }
     }
+    func Diaryfetch() -> [NSManagedObject] {
+        var result = [NSManagedObject]()
+        
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appdelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Diary")
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        
+        do {
+             result = try context.fetch(request) as! [NSManagedObject]
+        }catch {
+            print("fetch failed")
+        }
+        
+                return result
+        
+        
+    }
     
+    func dateconvert (result:[NSManagedObject]) -> [Any] {
+        var datedictionary = [String:String]()
+        var datechararry = [Character]()
+        var datearray = [Any]()
+        for i in result {
+            datedictionary = [:]
+            datechararry = []
+            let datefomater = DateFormatter()
+            datefomater.dateStyle = .short
+            var time = datefomater.string(from: i.value(forKey: "date") as! Date)
+            var count = 0
+            for char in time.characters {
+                
+                datechararry.append(char)
+                count = 0
+                
+            }
+            for a in 0...datechararry.count-1 {
+                
+                var month = [Character]()
+                var date = [Character]()
+                var year = [Character]()
+                if a != datechararry.count-1 {
+                    
+                    if datechararry[a] != "/" {
+                        
+                        switch count {
+                        case 0:
+                            month.append(datechararry[a])
+                        case 1:
+                            date.append(datechararry[a])
+                        default:
+                            year.append(datechararry[a])
+                            
+                        }
+                        
+                        
+                    }else {
+                        count += 1
+                        switch count {
+                        case 1:
+                            datedictionary["MM"] = String (month)
+                        default:
+                            datedictionary["DD"] = String (date)
+                        }
+                        
+                    }
+                }else {
+                    datedictionary["YY"] = String(year)
+                    
+                }
+                
+                datearray.append(datedictionary)
+                
+            }
+            
+        }
+        return datearray
+
+    }
+    @IBAction func fetchtest(_ sender: UIButton) {
+        
+        self.Diaryfetch()
+    }
 
     /*
     // MARK: - Navigation

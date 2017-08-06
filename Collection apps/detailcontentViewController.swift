@@ -1,21 +1,19 @@
 //
-//  testViewController.swift
+//  detailcontentViewController.swift
 //  Collection apps
 //
-//  Created by Mac on 2017/7/10.
+//  Created by Mac on 2017/7/30.
 //  Copyright © 2017年 Mac. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class friendViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
-    var currentUser = String()
-    var friendlist = ["test"]
+class detailcontentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    var contentfetch = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(currentUser)
-    
 
         // Do any additional setup after loading the view.
     }
@@ -24,20 +22,23 @@ class friendViewController: UIViewController, UITableViewDelegate,UITableViewDat
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "friidcell")
-        cell?.textLabel?.text = "test"
-        return cell!
-    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 24
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Listcell") as! detailTableViewCell
+        for _ in indexPath {
+            
+            cell.time.text = "\(indexPath.row)"
+            if contentfetch == false {
+                cell.list.text = ""
+            }
+            
+            
+        }
+        
+        return cell
     }
-    
-    
 
     /*
     // MARK: - Navigation
