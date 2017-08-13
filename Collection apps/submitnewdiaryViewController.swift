@@ -76,8 +76,7 @@ class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITex
             
             
             newDiary.setValue(Content.text, forKey: "content")
-            let dateforrecord = time
-            newDiary.setValue(dateforrecord, forKey: "date")
+            
             newDiary.setValue(dateconvert(datecomponent: datecomponent), forKey: "date")
             if let imagerecord = UIImagePNGRepresentation(memeryImage.image!) as? NSData {
                 

@@ -23,6 +23,8 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
     var monthref = Int()
     var yearref = Int()
     var dateref = Int()
+    var result = [NSManagedObject]()
+    var datearray = [Any]()
     
     
     override func viewDidLoad() {
@@ -37,6 +39,9 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         for i in 1...12 {
             month.append(String(i))
         }
+         result = self.Diaryfetch()
+        datearray = self.dateconvert(result: result)
+        
         
         
 
@@ -58,6 +63,7 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var numberofday = 0
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! dateCollectionViewCell
         switch monthused {
         case 1:
@@ -120,6 +126,19 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         }
         
         
+        for count in 0...datearray.count-1  {
+            
+            let ref = datearray[count] as! NSDictionary
+            if yearused == Int(ref["YY"] as! String) {
+                if monthused == Int(ref["MM"] as! String){
+                    if indexPath.row + 1 - week == Int(ref["DD"] as! String) {
+                        cell.recordspot.backgroundColor = .red
+                    }
+                }
+            }
+        }
+        
+        
         
         
         
@@ -179,13 +198,15 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Diaryediting"{
+        if segue.identifier == "showList"{
             
             
-            let NextVC = segue.destination as! submitnewdiaryViewController
-            NextVC.currentyear = yearused
-            NextVC.currentmonth = monthused
-            NextVC.currentdate = dateref
+            let tabcontroller = segue.destination as! tabBarViewController
+            let NextVC = tabcontroller.viewControllers![1] as! DiaryViewController
+            NextVC.yearref = yearused
+            NextVC.monthref = monthused
+            NextVC.dateref = dateref
+            
             
         }
     }
@@ -209,10 +230,14 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
     }
     
     func dateconvert (result:[NSManagedObject]) -> [Any] {
+        
         var datedictionary = [String:String]()
         var datechararry = [Character]()
         var datearray = [Any]()
         for i in result {
+            var month = [Character]()
+            var date = [Character]()
+            var year = [Character]()
             datedictionary = [:]
             datechararry = []
             let datefomater = DateFormatter()
@@ -225,12 +250,11 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
                 count = 0
                 
             }
+            
             for a in 0...datechararry.count-1 {
                 
-                var month = [Character]()
-                var date = [Character]()
-                var year = [Character]()
-                if a != datechararry.count-1 {
+                
+                if a < datechararry.count-1 {
                     
                     if datechararry[a] != "/" {
                         
@@ -256,21 +280,30 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
                         
                     }
                 }else {
-                    datedictionary["YY"] = String(year)
+                    year.append(datechararry[a])
+                    datedictionary["YY"] = "20" + String(year)
+                    
                     
                 }
                 
-                datearray.append(datedictionary)
+                
                 
             }
+            datearray.append(datedictionary)
             
         }
+        
         return datearray
 
     }
+    
+    
     @IBAction func fetchtest(_ sender: UIButton) {
         
-        self.Diaryfetch()
+        
+        let result = self.Diaryfetch()
+        let datearray = self.dateconvert(result: result)
+        
     }
 
     /*

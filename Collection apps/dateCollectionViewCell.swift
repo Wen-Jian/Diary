@@ -12,7 +12,9 @@ import UIKit
 class dateCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var title: UILabel!
+    var haverecord = false
     
+    @IBOutlet weak var recordspot: UILabel!
     
     
     
