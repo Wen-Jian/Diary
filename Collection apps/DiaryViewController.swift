@@ -14,7 +14,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate,UITableViewData
     
 
         // Do any additional setup after loading the view.
-    var diaryfetch = true
+
     var dateref = Int()
     var yearref = Int()
     var monthref = Int()
@@ -26,12 +26,22 @@ class DiaryViewController: UIViewController, UITableViewDelegate,UITableViewData
         super.viewDidLoad()
         diaryfound = self.Diaryfetch()
         
-        if diaryfetch == false {
+        if diaryfound.count == 0 {
+            for subview in self.view.subviews {
+                if subview.tag == 1 {
+                    
+                    subview.removeFromSuperview()
+                    
+                }
+                
+            }
             let fullscreen = UIScreen.main.bounds
-            let remindstring = UILabel()
-            remindstring.bounds = CGRect(x: 0, y: 0, width: fullscreen.width , height: 50)
+            let remindstring = UILabel(frame:CGRect(x: 0, y: 100, width: fullscreen.width , height: 50))
+            
             remindstring.text = "無紀錄"
+            remindstring.textAlignment = .center
             self.view.addSubview(remindstring)
+            
         }
         
         
@@ -78,7 +88,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate,UITableViewData
             
             
             if time == i.value(forKey: "date") as! Date {
-                diaryfetch = true
+                
                 print("date match")
                 result.append(i)
             }
@@ -116,20 +126,30 @@ class DiaryViewController: UIViewController, UITableViewDelegate,UITableViewData
         
         return cell
     }
-    
-    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        var number = 0
+        if diaryfound.count > 0 {
+            number = 1
+        }else {
+            number = 0
+        }
+        return number
     }
     
-    @IBAction func Addnewdiary(_ sender: UIButton) {
+
+    @IBAction func addnew(_ sender: UIButton) {
         
-        
-            
-        
-        //self.performSegue(withIdentifier: "addnew", sender: nil)
+        self.performSegue(withIdentifier: "addnew", sender: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let NextVC = segue.destination as! submitnewdiaryViewController
+        NextVC.currentdate = dateref
+        NextVC.currentyear = yearref
+        NextVC.currentmonth = monthref
+    }
+    
+
 
     /*
     // MARK: - Navigation

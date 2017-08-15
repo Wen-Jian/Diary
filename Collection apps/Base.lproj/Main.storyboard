@@ -340,39 +340,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="225" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="K5I-E7-veF">
-                                <rect key="frame" x="16" y="64" width="343" height="554"/>
+                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="339" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="K5I-E7-veF">
+                                <rect key="frame" x="16" y="110" width="343" height="508"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DiaryList" rowHeight="225" id="eOZ-3x-6dh" customClass="DiarycontentTableViewCell" customModule="Collection_apps" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="225"/>
+                                    <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DiaryList" rowHeight="339" id="eOZ-3x-6dh" customClass="DiarycontentTableViewCell" customModule="Collection_apps" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="339"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eOZ-3x-6dh" id="x0Z-0E-xt1">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="224"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="338"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lkc-ks-8FC">
-                                                    <rect key="frame" x="8" y="8" width="335" height="152"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lkc-ks-8FC">
+                                                    <rect key="frame" x="8" y="8" width="335" height="267.5"/>
                                                 </imageView>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QTt-WR-x1z">
-                                                    <rect key="frame" x="8" y="168" width="327" height="30"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8m-nX-Xa9">
+                                                    <rect key="frame" x="8" y="309.5" width="327" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="QTt-WR-x1z" secondAttribute="bottom" constant="18" id="AnP-ra-Yn9"/>
-                                                <constraint firstItem="QTt-WR-x1z" firstAttribute="trailing" secondItem="x0Z-0E-xt1" secondAttribute="trailingMargin" id="EKh-UN-Bpw"/>
-                                                <constraint firstItem="lkc-ks-8FC" firstAttribute="leading" secondItem="QTt-WR-x1z" secondAttribute="leading" id="GCH-ai-LSK"/>
+                                                <constraint firstItem="Y8m-nX-Xa9" firstAttribute="trailing" secondItem="x0Z-0E-xt1" secondAttribute="trailingMargin" id="GQO-pr-Y9u"/>
+                                                <constraint firstItem="Y8m-nX-Xa9" firstAttribute="leading" secondItem="x0Z-0E-xt1" secondAttribute="leadingMargin" id="Zrn-2U-5nP"/>
                                                 <constraint firstItem="lkc-ks-8FC" firstAttribute="top" secondItem="x0Z-0E-xt1" secondAttribute="topMargin" id="bJu-Dy-x5B"/>
+                                                <constraint firstItem="Y8m-nX-Xa9" firstAttribute="bottom" secondItem="x0Z-0E-xt1" secondAttribute="bottomMargin" id="jQc-Cn-URP"/>
                                                 <constraint firstAttribute="trailing" secondItem="lkc-ks-8FC" secondAttribute="trailing" id="jvB-TQ-HjT"/>
-                                                <constraint firstItem="QTt-WR-x1z" firstAttribute="top" secondItem="lkc-ks-8FC" secondAttribute="bottom" constant="8" symbolic="YES" id="uYU-yg-f9v"/>
+                                                <constraint firstItem="Y8m-nX-Xa9" firstAttribute="top" secondItem="lkc-ks-8FC" secondAttribute="bottom" constant="34" id="l30-Xt-yL5"/>
                                                 <constraint firstItem="lkc-ks-8FC" firstAttribute="leading" secondItem="x0Z-0E-xt1" secondAttribute="leadingMargin" id="ub0-AF-niw"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="diarycontent" destination="QTt-WR-x1z" id="KVi-Wj-43P"/>
+                                            <outlet property="diarycontent" destination="Y8m-nX-Xa9" id="g1C-g9-xjX"/>
                                             <outlet property="diaryimage" destination="lkc-ks-8FC" id="Zef-hC-hRw"/>
                                         </connections>
                                     </tableViewCell>
@@ -389,17 +389,17 @@
                                 </constraints>
                                 <state key="normal" title="Add"/>
                                 <connections>
-                                    <action selector="Addnewdiary:" destination="jIt-Ow-91x" eventType="touchUpInside" id="gCi-8e-gmd"/>
+                                    <action selector="addnew:" destination="jIt-Ow-91x" eventType="touchUpInside" id="gu9-0r-hKz"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="K5I-E7-veF" firstAttribute="trailing" secondItem="Kx3-Uq-S8w" secondAttribute="trailingMargin" id="Gen-Qc-OSZ"/>
-                            <constraint firstItem="K5I-E7-veF" firstAttribute="bottom" secondItem="ihw-bT-by8" secondAttribute="top" id="ZS2-xr-ZKZ"/>
-                            <constraint firstItem="K5I-E7-veF" firstAttribute="trailing" secondItem="qLv-a1-oWq" secondAttribute="trailing" id="f08-ja-WNY"/>
-                            <constraint firstItem="K5I-E7-veF" firstAttribute="leading" secondItem="Kx3-Uq-S8w" secondAttribute="leadingMargin" id="g4y-IE-jPy"/>
-                            <constraint firstItem="K5I-E7-veF" firstAttribute="top" secondItem="Xz1-cI-SzW" secondAttribute="bottom" id="gG2-EO-uK1"/>
+                            <constraint firstItem="K5I-E7-veF" firstAttribute="bottom" secondItem="ihw-bT-by8" secondAttribute="top" id="864-bT-DZf"/>
+                            <constraint firstItem="K5I-E7-veF" firstAttribute="leading" secondItem="Kx3-Uq-S8w" secondAttribute="leadingMargin" id="CLF-Pg-fs6"/>
+                            <constraint firstItem="K5I-E7-veF" firstAttribute="top" secondItem="qLv-a1-oWq" secondAttribute="bottom" constant="8" symbolic="YES" id="VI3-qc-bcd"/>
+                            <constraint firstItem="qLv-a1-oWq" firstAttribute="trailing" secondItem="Kx3-Uq-S8w" secondAttribute="trailingMargin" id="dLB-4c-gce"/>
+                            <constraint firstItem="K5I-E7-veF" firstAttribute="trailing" secondItem="qLv-a1-oWq" secondAttribute="trailing" id="owh-9j-2oH"/>
                             <constraint firstItem="qLv-a1-oWq" firstAttribute="top" secondItem="Xz1-cI-SzW" secondAttribute="bottom" constant="8" symbolic="YES" id="rjn-L5-SRh"/>
                         </constraints>
                     </view>
@@ -478,14 +478,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85l-kt-GQz">
-                                <rect key="frame" x="313" y="67" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="fetchtest:" destination="RDf-Ch-LIu" eventType="touchUpInside" id="Lsd-fq-djN"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -609,7 +601,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <state key="normal" title="..."/>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="05I-kP-Urj">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="05I-kP-Urj">
                                 <rect key="frame" x="64" y="333" width="295" height="145"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -630,6 +622,9 @@
                                 <state key="normal" title="相機" image="camera">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="imagefromcamera:" destination="aeY-VS-VNE" eventType="touchUpInside" id="amA-FQ-GXz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ce2-D9-l8j">
                                 <rect key="frame" x="64" y="554" width="295" height="45"/>

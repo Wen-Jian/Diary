@@ -17,7 +17,8 @@ class DiarycontentTableViewCell: UITableViewCell {
 
     @IBOutlet weak var diaryimage: UIImageView!
 
-    @IBOutlet weak var diarycontent: UITextField!
+    @IBOutlet weak var diarycontent: UILabel!
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

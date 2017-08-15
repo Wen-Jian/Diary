@@ -40,6 +40,8 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>是否前往圖片庫？</string>
+	<key>NSCameraUsageDescription</key>
+	<string>使否啟用相機？</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

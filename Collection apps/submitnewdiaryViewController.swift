@@ -33,9 +33,9 @@ class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITex
         yeartextfield.text = "\(currentyear)"
         monthtextfield.text = String(currentmonth)
         datetextfield.text = String(currentdate)
-        datecomponent.day = Int(datetextfield.text!)!
-        datecomponent.month = Int(monthtextfield.text!)!
-        datecomponent.year = Int(yeartextfield.text!)!
+        /*datecomponent.day = currentdate
+        datecomponent.month = currentmonth
+        datecomponent.year = currentyear*/
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.contentfinishediting))
         
@@ -55,9 +55,9 @@ class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITex
         // Dispose of any resources that can be recreated.
     }
     
-    func dateconvert (datecomponent:NSDateComponents) -> Date {
+    func dateconvert () -> Date {
         
-        let timestring = "\(datecomponent.day), \(datecomponent.month), \(datecomponent.year)"
+        let timestring = "\(currentdate), \(currentmonth), \(currentyear)"
         let formatter = DateFormatter()
         formatter.dateFormat = "dd, MM, yyyy"
         time = formatter.date(from: timestring)!
@@ -77,7 +77,7 @@ class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITex
             
             newDiary.setValue(Content.text, forKey: "content")
             
-            newDiary.setValue(dateconvert(datecomponent: datecomponent), forKey: "date")
+            newDiary.setValue(dateconvert(), forKey: "date")
             if let imagerecord = UIImagePNGRepresentation(memeryImage.image!) as? NSData {
                 
                 newDiary.setValue(imagerecord, forKey: "image")
@@ -162,6 +162,12 @@ class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITex
         
     }
     
+    @IBAction func imagefromcamera(_ sender: UIButton) {
+        let imagepicker = UIImagePickerController()
+        imagepicker.delegate = self
+        imagepicker.sourceType = .camera
+        self.present(imagepicker, animated: true, completion: nil)
+    }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let image = info [UIImagePickerControllerOriginalImage] as? UIImage {
