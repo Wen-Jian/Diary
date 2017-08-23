@@ -25,6 +25,9 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
     var dateref = Int()
     var result = [NSManagedObject]()
     var datearray = [Any]()
+    var record = false
+    var recordarray = [Bool]()
+    var somethingsaved = false
     
     
     override func viewDidLoad() {
@@ -41,6 +44,14 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         }
          result = self.Diaryfetch()
         datearray = self.dateconvert(result: result)
+        
+        for i in datearray {
+            
+            let ref = i as! NSDictionary
+            print(ref["MM"])
+            
+        }
+        
         
         
         
@@ -125,18 +136,56 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
             
         }
         
-        
-        for count in 0...datearray.count-1  {
+        recordarray = []
+        for i in datearray {
             
-            let ref = datearray[count] as! NSDictionary
-            if yearused == Int(ref["YY"] as! String) {
-                if monthused == Int(ref["MM"] as! String){
-                    if indexPath.row + 1 - week == Int(ref["DD"] as! String) {
-                        cell.recordspot.backgroundColor = .red
+            let ref = i as! NSDictionary
+            if Int(ref["YY"] as! String) == yearused {
+                
+                if Int(ref["MM"] as! String) == monthused {
+                    print(monthused)
+                    print(Int(ref["MM"] as! String))
+                    
+                    if Int(ref["DD"] as! String) == indexPath.row - week + 1 {
+                        
+                        print(Int(ref["DD"] as! String))
+                        print(indexPath.row - week + 1)
+                        record = true
+                    }else {
+                        record = false
                     }
+                }else {
+                    record = false
                 }
+                
+            }else {
+                record = false
             }
+            
+            recordarray.append(record)
+            
+            
         }
+        
+        record = false
+        for i in recordarray {
+            print(recordarray)
+            if i == true{
+                
+                record = true
+                print(record)
+            }
+            
+            
+        }
+        switch record {
+        case true:
+            cell.recordspot.backgroundColor = .red
+        default:
+            cell.recordspot.backgroundColor = .white
+        }
+        
+        
         
         
         
@@ -146,26 +195,24 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         return cell
     }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 3
+        return 2
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component{
         case 0:
             return year.count
-        case 1:
-            return month.count
         default:
-            return classfication.count
+            return month.count
+        
         }
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {
         case 0:
             return year[row]
-        case 1:
-            return month[row]
         default:
-            return classfication[row]
+            return month[row]
+        
         }
     }
     
@@ -173,12 +220,12 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         switch component {
         case 0:
             yearused = Int(year[row])!
-        case 1:
+            print(yearused)
+        default:
             
             monthused = Int(month[row])!
             
-        default:
-            classselected = Int(classfication[row])!
+       
         }
        
         self.calendar.reloadData()
@@ -194,15 +241,14 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         
         
         
-        self.performSegue(withIdentifier: "showList", sender: nil)
+        self.performSegue(withIdentifier: "showdiary", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showList"{
+        if segue.identifier == "showdiary"{
             
             
-            let tabcontroller = segue.destination as! tabBarViewController
-            let NextVC = tabcontroller.viewControllers![1] as! DiaryViewController
+            let NextVC = segue.destination as! DiaryViewController
             NextVC.yearref = yearused
             NextVC.monthref = monthused
             NextVC.dateref = dateref
@@ -298,13 +344,7 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
     }
     
     
-    @IBAction func fetchtest(_ sender: UIButton) {
-        
-        
-        let result = self.Diaryfetch()
-        let datearray = self.dateconvert(result: result)
-        
-    }
+
 
     /*
     // MARK: - Navigation

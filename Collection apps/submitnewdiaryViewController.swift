@@ -89,13 +89,20 @@ class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITex
             
             try context.save()
             print("成功提交")
-            self.performSegue(withIdentifier: "backtocalendar", sender: nil)
+            self.performSegue(withIdentifier: "back2menu", sender: nil)
             
         }catch{
             print("save failed")
         }
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let tabbarVC = segue.destination as! tabBarViewController
+        let nextVC = tabbarVC.viewControllers?[0] as! diarymenuViewController
+        nextVC.yearused = currentyear
+        nextVC.monthused = currentmonth
+        
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         self.view.endEditing(true)
@@ -127,7 +134,7 @@ class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITex
         }
         if datetextfield.text == "" {
            datetextfield.text = String(currentdate)
-        }else if Int(datetextfield.text!)! < 1 || Int(datetextfield.text!)!>31{
+        }else if Int(datetextfield.text!)! < 1 || Int(datetextfield.text!)! > 31{
             
             datetextfield.text = String(currentdate)
             
