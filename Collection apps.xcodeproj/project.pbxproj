@@ -217,7 +217,7 @@
 				TargetAttributes = {
 					04DCF3361EFD508F00F18977 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = B22646P5F7;
+						DevelopmentTeam = KF4K9T7GCG;
 						ProvisioningStyle = Automatic;
 					};
 					04DCF34D1EFD509000F18977 = {
@@ -448,10 +448,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = B22646P5F7;
+				DEVELOPMENT_TEAM = KF4K9T7GCG;
 				INFOPLIST_FILE = "Collection apps/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "yichi0707-gmail.com.Collection-apps";
+				PRODUCT_BUNDLE_IDENTIFIER = "Wen-Jian";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -462,10 +462,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = B22646P5F7;
+				DEVELOPMENT_TEAM = KF4K9T7GCG;
 				INFOPLIST_FILE = "Collection apps/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "yichi0707-gmail.com.Collection-apps";
+				PRODUCT_BUNDLE_IDENTIFIER = "Wen-Jian";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
