@@ -98,9 +98,10 @@ class submitnewdiaryViewController: UIViewController, UITextFieldDelegate, UITex
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let tabbarVC = segue.destination as! tabBarViewController
-        let nextVC = tabbarVC.viewControllers?[0] as! diarymenuViewController
+        let nextVC = tabbarVC.viewControllers?[0] as! caleadarViewcontroller
         nextVC.yearused = currentyear
         nextVC.monthused = currentmonth
+        nextVC.somethingsaved = true
         
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		042D84171F1A0F0D001A2A0A /* diarymenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D84161F1A0F0D001A2A0A /* diarymenuViewController.swift */; };
+		042D84171F1A0F0D001A2A0A /* calendarViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D84161F1A0F0D001A2A0A /* calendarViewcontroller.swift */; };
 		042D841D1F1AF1DA001A2A0A /* dateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D841C1F1AF1DA001A2A0A /* dateCollectionViewCell.swift */; };
 		044E33051F3EF23000EB8BE8 /* DiarycontentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E33041F3EF23000EB8BE8 /* DiarycontentTableViewCell.swift */; };
-		044EA0451F2D70C400FC0838 /* detailcontentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044EA0441F2D70C400FC0838 /* detailcontentViewController.swift */; };
-		044EA0471F2D78B400FC0838 /* detailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044EA0461F2D78B400FC0838 /* detailTableViewCell.swift */; };
 		0473FD3E1F0CABB30084A01A /* mainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473FD3D1F0CABB30084A01A /* mainTableViewController.swift */; };
 		0473FD461F13B4060084A01A /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473FD451F13B4060084A01A /* DiaryViewController.swift */; };
 		04B6C5C21F20DF6400AD3F83 /* submitnewdiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B6C5C11F20DF6400AD3F83 /* submitnewdiaryViewController.swift */; };
@@ -44,11 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		042D84161F1A0F0D001A2A0A /* diarymenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = diarymenuViewController.swift; sourceTree = "<group>"; };
+		042D84161F1A0F0D001A2A0A /* calendarViewcontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calendarViewcontroller.swift; sourceTree = "<group>"; };
 		042D841C1F1AF1DA001A2A0A /* dateCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dateCollectionViewCell.swift; sourceTree = "<group>"; };
 		044E33041F3EF23000EB8BE8 /* DiarycontentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiarycontentTableViewCell.swift; sourceTree = "<group>"; };
-		044EA0441F2D70C400FC0838 /* detailcontentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailcontentViewController.swift; sourceTree = "<group>"; };
-		044EA0461F2D78B400FC0838 /* detailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailTableViewCell.swift; sourceTree = "<group>"; };
 		0473FD3D1F0CABB30084A01A /* mainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainTableViewController.swift; sourceTree = "<group>"; };
 		0473FD451F13B4060084A01A /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		04B6C5C11F20DF6400AD3F83 /* submitnewdiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = submitnewdiaryViewController.swift; sourceTree = "<group>"; };
@@ -118,16 +114,14 @@
 			isa = PBXGroup;
 			children = (
 				04DCF33A1EFD509000F18977 /* AppDelegate.swift */,
+				042D84161F1A0F0D001A2A0A /* calendarViewcontroller.swift */,
+				0473FD451F13B4060084A01A /* DiaryViewController.swift */,
+				044E33041F3EF23000EB8BE8 /* DiarycontentTableViewCell.swift */,
+				04B6C5C11F20DF6400AD3F83 /* submitnewdiaryViewController.swift */,
 				04DCF33C1EFD509000F18977 /* LoginViewController.swift */,
 				0473FD3D1F0CABB30084A01A /* mainTableViewController.swift */,
-				0473FD451F13B4060084A01A /* DiaryViewController.swift */,
 				04DCF33E1EFD509000F18977 /* Main.storyboard */,
-				044E33041F3EF23000EB8BE8 /* DiarycontentTableViewCell.swift */,
-				044EA0441F2D70C400FC0838 /* detailcontentViewController.swift */,
-				044EA0461F2D78B400FC0838 /* detailTableViewCell.swift */,
 				042D841C1F1AF1DA001A2A0A /* dateCollectionViewCell.swift */,
-				042D84161F1A0F0D001A2A0A /* diarymenuViewController.swift */,
-				04B6C5C11F20DF6400AD3F83 /* submitnewdiaryViewController.swift */,
 				04D185321F15067D00C3E6A8 /* tabBarViewController.swift */,
 				04EFAB841F0BC4920051F8CA /* Assets.xcassets */,
 				04DCF3461EFD509000F18977 /* LaunchScreen.storyboard */,
@@ -293,10 +287,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0473FD3E1F0CABB30084A01A /* mainTableViewController.swift in Sources */,
-				044EA0471F2D78B400FC0838 /* detailTableViewCell.swift in Sources */,
-				042D84171F1A0F0D001A2A0A /* diarymenuViewController.swift in Sources */,
+				042D84171F1A0F0D001A2A0A /* calendarViewcontroller.swift in Sources */,
 				0473FD461F13B4060084A01A /* DiaryViewController.swift in Sources */,
-				044EA0451F2D70C400FC0838 /* detailcontentViewController.swift in Sources */,
 				04DCF33D1EFD509000F18977 /* LoginViewController.swift in Sources */,
 				04D185331F15067D00C3E6A8 /* tabBarViewController.swift in Sources */,
 				04B6C5C21F20DF6400AD3F83 /* submitnewdiaryViewController.swift in Sources */,

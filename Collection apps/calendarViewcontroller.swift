@@ -10,13 +10,15 @@ import UIKit
 import CoreData
 private let reuseIdentifier = "Cell"
 
-class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICollectionViewDelegate, UIPickerViewDelegate,UIPickerViewDataSource {
+class caleadarViewcontroller: UIViewController, UICollectionViewDataSource,UICollectionViewDelegate, UIPickerViewDelegate,UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var monthlabel: UILabel!
+    @IBOutlet weak var yearlabel: UILabel!
     @IBOutlet weak var calendar: UICollectionView!
     let classfication = ["工作記事", "心情扎記"]
     var year = [String]()
     var month = [String]()
-    var yearused = 2002
+    var yearused = 2014
     var monthused = 1
     var classselected = 0
     var week = Int()
@@ -28,13 +30,30 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
     var record = false
     var recordarray = [Bool]()
     var somethingsaved = false
+    var yearchoice: UITableView!
+    var monthchoice: UITableView!
+    var yearbuttonpushed = false
+    var monthbuttonpushed = false
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         /*calendar.register(dateCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)*/
         
-        for i in 2002...2017 {
+        yearlabel.text = String(yearused)
+        monthlabel.text = String(monthused)
+        
+        if somethingsaved == true {
+            
+            yearlabel.text = String(yearused)
+            monthlabel.text = String(monthused)
+            
+        }else {
+            yearlabel.text = "請選擇"
+            monthlabel.text = "請選擇"
+            
+        }
+        for i in 2014...2017 {
             
             year.append(String(i))
             
@@ -48,11 +67,17 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         for i in datearray {
             
             let ref = i as! NSDictionary
-            print(ref["MM"])
+            
             
         }
+        yearchoice = UITableView()
+        yearchoice.tag = 1
+        yearchoice.frame = CGRect(x: yearlabel.bounds.origin.x, y: yearlabel.bounds.origin.y + yearlabel.bounds.height, width: yearlabel.bounds.width, height: 30)
+        yearchoice.numberOfRows(inSection: year.count)
+        yearchoice.register(UITableViewCell.self, forCellReuseIdentifier: "yeartable")
+        yearchoice.delegate = self
         
-        
+
         
         
 
@@ -74,6 +99,7 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var numberofday = 0
+    
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! dateCollectionViewCell
         switch monthused {
@@ -143,13 +169,11 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
             if Int(ref["YY"] as! String) == yearused {
                 
                 if Int(ref["MM"] as! String) == monthused {
-                    print(monthused)
-                    print(Int(ref["MM"] as! String))
+                    
+                    
                     
                     if Int(ref["DD"] as! String) == indexPath.row - week + 1 {
-                        
-                        print(Int(ref["DD"] as! String))
-                        print(indexPath.row - week + 1)
+                    
                         record = true
                     }else {
                         record = false
@@ -169,11 +193,11 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         
         record = false
         for i in recordarray {
-            print(recordarray)
+            
             if i == true{
                 
                 record = true
-                print(record)
+                
             }
             
             
@@ -220,7 +244,7 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         switch component {
         case 0:
             yearused = Int(year[row])!
-            print(yearused)
+            
         default:
             
             monthused = Int(month[row])!
@@ -342,7 +366,111 @@ class diarymenuViewController: UIViewController, UICollectionViewDataSource,UICo
         return datearray
 
     }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(tableView.tag)
+        switch tableView.tag {
+        
+        case 1:
+            return year.count
+            
+        case 2:
+            return month.count
+        default:
+            return 0
+        }
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch tableView.tag {
+        case 1:
+            
+            
+            let cell = yearchoice.dequeueReusableCell(withIdentifier: "yeartable")
+            cell?.textLabel?.text = year[indexPath.row]
+            cell?.backgroundColor = .gray
+            return cell!
+
+        default:
+            
+            let cell = monthchoice.dequeueReusableCell(withIdentifier: "monthtable")
+            cell?.textLabel?.text = month[indexPath.row]
+            return cell!
+        }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch tableView.tag {
+        case 1:
+            yearlabel.text = year[indexPath.row]
+            yearchoice.removeFromSuperview()
+            yearused = Int(yearlabel.text!)!
+            self.calendar.reloadData()
+        default:
+            monthlabel.text = month[indexPath.row]
+            monthchoice.removeFromSuperview()
+            monthused = Int(monthlabel.text!)!
+            self.calendar.reloadData()
+        }
+    }
+    @IBAction func yearselectionbutton(_ sender: UIButton) {
+        
+        
+        if yearbuttonpushed == false{
+            
+            yearchoice = UITableView()
+            yearchoice.tag = 1
+            yearchoice.frame = CGRect(x: 65, y: 125, width: 78, height: 150)
+            
+            
+            yearchoice.register(UITableViewCell.self, forCellReuseIdentifier: "yeartable")
+            yearchoice.delegate = self
+            yearchoice.dataSource = self
+            
+            
+            
+            self.view.addSubview(yearchoice)
+            yearbuttonpushed = true
+
+        }else {
+            yearbuttonpushed = false
+            yearchoice.removeFromSuperview()
+            
+        }
+        
+        
+        
+        
+    }
     
+    @IBAction func monthselectionbutton(_ sender: UIButton) {
+        
+        
+        if monthbuttonpushed == false{
+            
+            monthchoice = UITableView()
+            monthchoice.tag = 2
+            monthchoice.frame = CGRect(x: 230, y: 125, width: 78, height: 150)
+            
+            
+            yearchoice.register(UITableViewCell.self, forCellReuseIdentifier: "yeartable")
+            monthchoice.register(UITableViewCell.self, forCellReuseIdentifier: "monthtable")
+            monthchoice.delegate = self
+            monthchoice.dataSource = self
+            
+            
+            
+            self.view.addSubview(monthchoice)
+            monthbuttonpushed = true
+            
+        }else {
+            monthbuttonpushed = false
+            monthchoice.removeFromSuperview()
+            
+        }
+        
+        
+    }
     
 
 
